@@ -5,5 +5,5 @@ from .models import Cliente
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'telefone', 'is_active')
-    search_fields = ('username', 'email', 'telefone')
+    list_display = ('id', 'username', 'email', 'telefone','password')
+    

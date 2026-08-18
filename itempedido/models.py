@@ -13,13 +13,5 @@ class ItemPedido(models.Model):
     class Meta:
         unique_together = ('pedido', 'item')
 
-    def calcular_subtotal(self) -> float:
-        return self.quantidade * self.preco_unitario
-
-    def save(self, *args, **kwargs):
-        if not self.preco_unitario:
-            self.preco_unitario = self.item.preco
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.quantidade}x {self.item.nome}"

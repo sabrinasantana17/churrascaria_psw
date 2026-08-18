@@ -5,6 +5,5 @@ from .models import Funcionario
 
 @admin.register(Funcionario)
 class FuncionarioAdmin(admin.ModelAdmin):
-    list_display = ('username', 'cargo', 'telefone', 'is_active')
-    list_filter = ('cargo',)
-    search_fields = ('username', 'telefone')
+    list_display = ('id', 'username', 'cargo', 'telefone', 'password', 'salario')
+    

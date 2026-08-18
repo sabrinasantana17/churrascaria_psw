@@ -5,6 +5,5 @@ from .models import Item
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'categoria', 'preco', 'disponivel')
-    list_filter = ('categoria', 'disponivel')
-    search_fields = ('nome',)
+    list_display = ('id', 'nome', 'descricao', 'preco', 'categoria', 'disponivel')
+    
