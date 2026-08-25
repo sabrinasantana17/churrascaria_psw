@@ -5,5 +5,5 @@ from .models import Funcionario
 
 @admin.register(Funcionario)
 class FuncionarioAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'cargo', 'telefone', 'password', 'salario')
+    list_display = ('id', 'username', 'cargo', 'telefone', 'password', 'salario', 'email')
     
