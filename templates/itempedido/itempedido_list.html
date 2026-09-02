@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Itens do pedido{% endblock %}
+{% block content %}
+    <h1>Itens do pedido</h1>
+    <a class="btn" href="{% url 'itempedido_create' %}">+ Novo item de pedido</a>
+
+    {% if itens_pedido %}
+        <table>
+            <tr>
+                <th>Pedido</th>
+                <th>Item</th>
+                <th>Qtd</th>
+                <th>Preço (conjunto)</th>
+                <th>Observação</th>
+            </tr>
+            {% for ip in itens_pedido %}
+                <tr>
+                    <td>#{{ ip.pedido_id }}</td>
+                    <td>{{ ip.item }}</td>
+                    <td>{{ ip.quantidade }}</td>
+                    <td>R$ {{ ip.preco_conjunto }}</td>
+                    <td>{{ ip.observacao|default:"—" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="empty">Nenhum item de pedido cadastrado ainda.</p>
+    {% endif %}
+{% endblock %}
