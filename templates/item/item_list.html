@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Itens{% endblock %}
+{% block content %}
+    <h1>Itens do cardápio</h1>
+    <a class="btn" href="{% url 'item_create' %}">+ Novo item</a>
+
+    {% if itens %}
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Disponível</th>
+            </tr>
+            {% for item in itens %}
+                <tr>
+                    <td>{{ item.nome }}</td>
+                    <td>{{ item.get_categoria_display }}</td>
+                    <td>R$ {{ item.preco }}</td>
+                    <td>{% if item.disponivel %}Sim{% else %}Não{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="empty">Nenhum item cadastrado ainda.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+    <h1>Clientes</h1>
+    <a class="btn" href="{% url 'cliente_create' %}">+ Novo cliente</a>
+
+    {% if clientes %}
+        <table>
+            <tr>
+                <th>Usuário</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+            </tr>
+            {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.username }}</td>
+                    <td>{{ cliente.get_full_name }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.telefone }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="empty">Nenhum cliente cadastrado ainda.</p>
+    {% endif %}
+{% endblock %}
