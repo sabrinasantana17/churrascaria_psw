@@ -18,6 +18,12 @@ class FuncionarioForm(forms.ModelForm):
             'salario': 'Salário',
         }
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if Funcionario.objects.filter(username=username).exists():
+            raise forms.ValidationError('Já existe um usuário com esse nome. Escolha outro.')
+        return username
+
     def save(self, commit=True):
         funcionario = super().save(commit=False)
         funcionario.set_password(self.cleaned_data['password'])
