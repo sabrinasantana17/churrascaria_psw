@@ -2,7 +2,10 @@
 {% block title %}Itens{% endblock %}
 {% block content %}
     <h1>Itens do cardápio</h1>
+
+    {% if perms.item.add_item %}
     <a class="btn" href="{% url 'item_create' %}">+ Novo item</a>
+    {% endif %}
 
     {% if itens %}
         <table>

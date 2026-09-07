@@ -9,11 +9,21 @@
 <body>
     {% block navbar %}
     <nav>
-        <a href="{% url 'item_list' %}">Itens</a>
-        <a href="{% url 'cliente_list' %}">Clientes</a>
-        <a href="{% url 'funcionario_list' %}">Funcionários</a>
-        <a href="{% url 'pedido_list' %}">Pedidos</a>
-        <a href="{% url 'itempedido_list' %}">Itens do Pedido</a>
+        {% if perms.item.view_item %}
+            <a href="{% url 'item_list' %}">Itens</a>
+        {% endif %}
+        {% if perms.cliente.view_cliente %}
+            <a href="{% url 'cliente_list' %}">Clientes</a>
+        {% endif %}
+        {% if perms.funcionario.view_funcionario %}
+            <a href="{% url 'funcionario_list' %}">Funcionários</a>
+        {% endif %}
+        {% if perms.pedido.view_pedido %}
+            <a href="{% url 'pedido_list' %}">Pedidos</a>
+        {% endif %}
+        {% if perms.itempedido.view_itempedido %}
+            <a href="{% url 'itempedido_list' %}">Itens do Pedido</a>
+        {% endif %}
         {% if user.is_authenticated %}
             <span style="color:#fff; float:right;">Olá, {{ user.username }} |
             <form action="{% url 'logout' %}" method="post" class="logout-form">
