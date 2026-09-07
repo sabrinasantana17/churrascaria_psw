@@ -1,8 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import Group
 from .models import Funcionario
 from .forms import FuncionarioForm
+
+
+def _adicionar_ao_grupo_cargo(funcionario):
+    """Garante que todo Funcionario criado entre no grupo do seu cargo
+    (Gerente, Garçom ou Cozinheiro)."""
+    nome_grupo = funcionario.get_cargo_display()  # 'Gerente' / 'Garçom' / 'Cozinheiro'
+    grupo, _ = Group.objects.get_or_create(name=nome_grupo)
+    funcionario.groups.add(grupo)
+
 
 @login_required
 @permission_required('funcionario.view_funcionario', raise_exception=True)
@@ -10,13 +20,15 @@ def funcionario_list(request):
     funcionarios = Funcionario.objects.all().order_by('username')
     return render(request, 'funcionario/funcionario_list.html', {'funcionarios': funcionarios})
 
+
 @login_required
 @permission_required('funcionario.add_funcionario', raise_exception=True)
 def funcionario_create(request):
     if request.method == 'POST':
         form = FuncionarioForm(request.POST)
         if form.is_valid():
-            form.save()
+            funcionario = form.save()
+            _adicionar_ao_grupo_cargo(funcionario)
             messages.success(request, 'Funcionário cadastrado com sucesso!')
             return redirect('funcionario_list')
     else:
