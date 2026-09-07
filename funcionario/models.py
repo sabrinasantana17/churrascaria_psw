@@ -6,8 +6,8 @@ class Funcionario(User):
 
     CARGO_CHOICES = [
         ('GERENTE', 'Gerente'),
-        ('VENDEDOR', 'Vendedor'),
-        ('CAIXA', 'Caixa'),
+        ('GARÇOM', 'Garçom'),
+        ('COZINHEIRO', 'Cozinheiro'),
     ]
 
     cargo = models.CharField(max_length=20, choices=CARGO_CHOICES)

@@ -18,13 +18,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(pattern_name='item_list'), name='home'),
+    path('accounts/login/', LoginView.as_view(template_name='cliente/login.html'), name='login'),
+    path('accounts/logout/', LogoutView.as_view(), name='logout'),
     path('itens/', include('item.urls')),
     path('clientes/', include('cliente.urls')),
     path('funcionarios/', include('funcionario.urls')),
     path('pedidos/', include('pedido.urls')),
     path('itempedidos/', include('itempedido.urls')),
+    path('', RedirectView.as_view(pattern_name='item_list'), name='home'),
 ]

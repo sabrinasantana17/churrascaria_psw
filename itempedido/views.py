@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import ItemPedido
 from .forms import ItemPedidoForm
 
-
+@login_required
 def itempedido_list(request):
     itens_pedido = ItemPedido.objects.all().order_by('pedido_id')
     return render(request, 'itempedido/itempedido_list.html', {'itens_pedido': itens_pedido})
 
-
+@login_required
 def itempedido_create(request):
     if request.method == 'POST':
         form = ItemPedidoForm(request.POST)
