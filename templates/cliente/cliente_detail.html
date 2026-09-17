@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{ cliente.get_full_name|default:cliente.username }}{% endblock %}
+{% block content %}
+    <h1>{{ cliente.get_full_name|default:cliente.username }}</h1>
+
+    <table>
+        <tr>
+            <th>Usuário</th>
+            <td>{{ cliente.username }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+            <td>{{ cliente.get_full_name|default:"—" }}</td>
+        </tr>
+        <tr>
+            <th>E-mail</th>
+            <td>{{ cliente.email|default:"—" }}</td>
+        </tr>
+        <tr>
+            <th>Telefone</th>
+            <td>{{ cliente.telefone|default:"—" }}</td>
+        </tr>
+        <tr>
+            <th>Conta ativa</th>
+            <td>{% if cliente.is_active %}Sim{% else %}Não{% endif %}</td>
+        </tr>
+    </table>
+
+    <p><a class="btn" href="{% url 'cliente_list' %}">&larr; Voltar</a></p>
+{% endblock %}

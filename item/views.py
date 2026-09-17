@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import Item
@@ -23,3 +23,10 @@ def item_create(request):
     else:
         form = ItemForm()
     return render(request, 'item/item_form.html', {'form': form})
+
+
+@login_required
+@permission_required('item.view_item', raise_exception=True)
+def item_detail(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    return render(request, 'item/item_detail.html', {'item': item})

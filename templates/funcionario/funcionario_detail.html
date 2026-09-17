@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ funcionario.get_full_name|default:funcionario.username }}{% endblock %}
+{% block content %}
+    <h1>{{ funcionario.get_full_name|default:funcionario.username }}</h1>
+
+    <table>
+        <tr>
+            <th>Usuário</th>
+            <td>{{ funcionario.username }}</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+            <td>{{ funcionario.get_full_name|default:"—" }}</td>
+        </tr>
+        <tr>
+            <th>Cargo</th>
+            <td>{{ funcionario.get_cargo_display }}</td>
+        </tr>
+        <tr>
+            <th>E-mail</th>
+            <td>{{ funcionario.email|default:"—" }}</td>
+        </tr>
+        <tr>
+            <th>Telefone</th>
+            <td>{{ funcionario.telefone|default:"—" }}</td>
+        </tr>
+        <tr>
+            <th>Salário</th>
+            <td>R$ {{ funcionario.salario }}</td>
+        </tr>
+    </table>
+
+    <p><a class="btn" href="{% url 'funcionario_list' %}">&larr; Voltar</a></p>
+{% endblock %}

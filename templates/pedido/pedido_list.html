@@ -7,23 +7,25 @@
     {% if pedidos %}
         <table>
             <tr>
-                <th>#</th>
-                <th>Cliente</th>
-                <th>Funcionário</th>
-                <th>Pago</th>
-                <th>Criado em</th>
-                <th>Total</th>
-            </tr>
-            {% for pedido in pedidos %}
-                <tr>
-                    <td>{{ pedido.id }}</td>
-                    <td>{{ pedido.cliente }}</td>
-                    <td>{{ pedido.funcionario|default:"—" }}</td>
-                    <td>{% if pedido.pagamento_efetuado %}Sim{% else %}Não{% endif %}</td>
-                    <td>{{ pedido.criado_em }}</td>
-                    <td>R$ {{ pedido.valor_total }}</td>
-                </tr>
-            {% endfor %}
+    <th>#</th>
+    <th>Cliente</th>
+    <th>Funcionário</th>
+    <th>Pago</th>
+    <th>Criado em</th>
+    <th>Total</th>
+    <th></th>
+</tr>
+{% for pedido in pedidos %}
+    <tr>
+        <td>{{ pedido.id }}</td>
+        <td>{{ pedido.cliente }}</td>
+        <td>{{ pedido.funcionario|default:"—" }}</td>
+        <td>{% if pedido.pagamento_efetuado %}Sim{% else %}Não{% endif %}</td>
+        <td>{{ pedido.criado_em }}</td>
+        <td>R$ {{ pedido.valor_total }}</td>
+        <td><a href="{% url 'pedido_detail' pedido.pk %}">Detalhes</a></td>
+    </tr>
+{% endfor %}
         </table>
     {% else %}
         <p class="empty">Nenhum pedido cadastrado ainda.</p>

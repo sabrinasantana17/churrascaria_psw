@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Item do pedido #{{ item_pedido.id }}{% endblock %}
+{% block content %}
+    <h1>Item do pedido #{{ item_pedido.id }}</h1>
+
+    <table>
+        <tr>
+            <th>Pedido</th>
+            <td><a href="{% url 'pedido_detail' item_pedido.pedido_id %}">Pedido #{{ item_pedido.pedido_id }}</a></td>
+        </tr>
+        <tr>
+            <th>Item</th>
+            <td><a href="{% url 'item_detail' item_pedido.item_id %}">{{ item_pedido.item }}</a></td>
+        </tr>
+        <tr>
+            <th>Quantidade</th>
+            <td>{{ item_pedido.quantidade }}</td>
+        </tr>
+        <tr>
+            <th>Preço (conjunto)</th>
+            <td>R$ {{ item_pedido.preco_conjunto }}</td>
+        </tr>
+        <tr>
+            <th>Observação</th>
+            <td>{{ item_pedido.observacao|default:"—" }}</td>
+        </tr>
+    </table>
+
+    <p><a class="btn" href="{% url 'itempedido_list' %}">&larr; Voltar</a></p>
+{% endblock %}

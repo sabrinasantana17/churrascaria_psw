@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.itempedido_list, name='itempedido_list'),
     path('novo/', views.itempedido_create, name='itempedido_create'),
+    path('<int:pk>/', views.itempedido_detail, name='itempedido_detail'),
 ]

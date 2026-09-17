@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group
@@ -45,3 +45,9 @@ def cadastro(request):
     else:
         form = ClienteForm()
     return render(request, 'cliente/cadastro.html', {'form': form})
+
+@login_required
+@permission_required('cliente.view_cliente', raise_exception=True)
+def cliente_detail(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    return render(request, 'cliente/cliente_detail.html', {'cliente': cliente})

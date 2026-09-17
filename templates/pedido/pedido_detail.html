@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Pedido #{{ pedido.id }}{% endblock %}
+{% block content %}
+    <h1>Pedido #{{ pedido.id }}</h1>
+
+    <table>
+        <tr>
+            <th>Cliente</th>
+            <td>{{ pedido.cliente }}</td>
+        </tr>
+        <tr>
+            <th>Funcionário</th>
+            <td>{{ pedido.funcionario|default:"—" }}</td>
+        </tr>
+        <tr>
+            <th>Criado em</th>
+            <td>{{ pedido.criado_em }}</td>
+        </tr>
+        <tr>
+            <th>Pagamento</th>
+            <td>{% if pedido.pagamento_efetuado %}Efetuado{% else %}Pendente{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Valor total</th>
+            <td>R$ {{ pedido.valor_total }}</td>
+        </tr>
+    </table>
+
+    <h2>Itens do pedido</h2>
+    {% if itens_do_pedido %}
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Qtd</th>
+                <th>Preço (conjunto)</th>
+                <th>Observação</th>
+            </tr>
+            {% for ip in itens_do_pedido %}
+                <tr>
+                    <td>{{ ip.item }}</td>
+                    <td>{{ ip.quantidade }}</td>
+                    <td>R$ {{ ip.preco_conjunto }}</td>
+                    <td>{{ ip.observacao|default:"—" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="empty">Nenhum item lançado neste pedido ainda.</p>
+    {% endif %}
+
+    <p><a class="btn" href="{% url 'pedido_list' %}">&larr; Voltar</a></p>
+{% endblock %}

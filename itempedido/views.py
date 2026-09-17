@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import ItemPedido
@@ -22,3 +22,9 @@ def itempedido_create(request):
     else:
         form = ItemPedidoForm()
     return render(request, 'itempedido/itempedido_form.html', {'form': form})
+
+@login_required
+@permission_required('itempedido.view_itempedido', raise_exception=True)
+def itempedido_detail(request, pk):
+    item_pedido = get_object_or_404(ItemPedido, pk=pk)
+    return render(request, 'itempedido/itempedido_detail.html', {'item_pedido': item_pedido})

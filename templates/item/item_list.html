@@ -14,6 +14,7 @@
                 <th>Categoria</th>
                 <th>Preço</th>
                 <th>Disponível</th>
+                <th></th>
             </tr>
             {% for item in itens %}
                 <tr>
@@ -21,6 +22,7 @@
                     <td>{{ item.get_categoria_display }}</td>
                     <td>R$ {{ item.preco }}</td>
                     <td>{% if item.disponivel %}Sim{% else %}Não{% endif %}</td>
+                    <td><a href="{% url 'item_detail' item.pk %}">Detalhes</a></td>
                 </tr>
             {% endfor %}
         </table>

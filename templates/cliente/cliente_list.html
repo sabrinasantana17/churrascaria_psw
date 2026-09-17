@@ -11,6 +11,7 @@
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Telefone</th>
+                <th></th>
             </tr>
             {% for cliente in clientes %}
                 <tr>
@@ -18,6 +19,7 @@
                     <td>{{ cliente.get_full_name }}</td>
                     <td>{{ cliente.email }}</td>
                     <td>{{ cliente.telefone }}</td>
+                    <td><a href="{% url 'cliente_detail' cliente.pk %}">Detalhes</a></td>
                 </tr>
             {% endfor %}
         </table>

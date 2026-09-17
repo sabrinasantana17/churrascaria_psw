@@ -7,21 +7,23 @@
     {% if funcionarios %}
         <table>
             <tr>
-                <th>Usuário</th>
-                <th>Nome</th>
-                <th>Cargo</th>
-                <th>Telefone</th>
-                <th>Salário</th>
-            </tr>
-            {% for funcionario in funcionarios %}
-                <tr>
-                    <td>{{ funcionario.username }}</td>
-                    <td>{{ funcionario.get_full_name }}</td>
-                    <td>{{ funcionario.get_cargo_display }}</td>
-                    <td>{{ funcionario.telefone }}</td>
-                    <td>R$ {{ funcionario.salario }}</td>
-                </tr>
-            {% endfor %}
+    <th>Usuário</th>
+    <th>Nome</th>
+    <th>Cargo</th>
+    <th>Telefone</th>
+    <th>Salário</th>
+    <th></th>
+</tr>
+{% for funcionario in funcionarios %}
+    <tr>
+        <td>{{ funcionario.username }}</td>
+        <td>{{ funcionario.get_full_name }}</td>
+        <td>{{ funcionario.get_cargo_display }}</td>
+        <td>{{ funcionario.telefone }}</td>
+        <td>R$ {{ funcionario.salario }}</td>
+        <td><a href="{% url 'funcionario_detail' funcionario.pk %}">Detalhes</a></td>
+    </tr>
+{% endfor %}
         </table>
     {% else %}
         <p class="empty">Nenhum funcionário cadastrado ainda.</p>

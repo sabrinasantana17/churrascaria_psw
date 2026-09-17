@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group
@@ -34,3 +34,10 @@ def funcionario_create(request):
     else:
         form = FuncionarioForm()
     return render(request, 'funcionario/funcionario_form.html', {'form': form})
+
+
+@login_required
+@permission_required('funcionario.view_funcionario', raise_exception=True)
+def funcionario_detail(request, pk):
+    funcionario = get_object_or_404(Funcionario, pk=pk)
+    return render(request, 'funcionario/funcionario_detail.html', {'funcionario': funcionario})
