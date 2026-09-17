@@ -19,13 +19,18 @@ def pedido_list(request):
 @permission_required('pedido.add_pedido', raise_exception=True)
 def pedido_create(request):
     if request.method == 'POST':
-        form = PedidoForm(request.POST)
+        form = PedidoForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save()
+            pedido = form.save(commit=False)
+            # Se quem preencheu é um cliente, o pedido é sempre dele mesmo
+            # (o campo nem aparece no formulário nesse caso).
+            if hasattr(request.user, 'cliente'):
+                pedido.cliente = request.user.cliente
+            pedido.save()
             messages.success(request, 'Pedido criado com sucesso!')
             return redirect('pedido_list')
     else:
-        form = PedidoForm()
+        form = PedidoForm(user=request.user)
     return render(request, 'pedido/pedido_form.html', {'form': form})
 
 @login_required

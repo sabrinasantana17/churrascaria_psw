@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'item',
     'pedido',
     'itempedido',
+    'feedback',
 ]
 
 MIDDLEWARE = [

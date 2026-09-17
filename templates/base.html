@@ -9,6 +9,9 @@
 <body>
     {% block navbar %}
     <nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'feedback_list' %}">Feedback</a>
+        {% endif %}
         {% if perms.item.view_item %}
             <a href="{% url 'item_list' %}">Itens</a>
         {% endif %}

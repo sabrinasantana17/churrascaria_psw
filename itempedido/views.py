@@ -14,13 +14,13 @@ def itempedido_list(request):
 @permission_required('itempedido.add_itempedido', raise_exception=True)
 def itempedido_create(request):
     if request.method == 'POST':
-        form = ItemPedidoForm(request.POST)
+        form = ItemPedidoForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, 'Item do pedido cadastrado com sucesso!')
             return redirect('itempedido_list')
     else:
-        form = ItemPedidoForm()
+        form = ItemPedidoForm(user=request.user)
     return render(request, 'itempedido/itempedido_form.html', {'form': form})
 
 @login_required

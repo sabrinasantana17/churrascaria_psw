@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Feedback #{{ feedback.id }}{% endblock %}
+{% block content %}
+    <h1>Feedback #{{ feedback.id }}</h1>
+
+    <table>
+        <tr>
+            <th>Usuário</th>
+            <td>{{ feedback.usuario.get_full_name|default:feedback.usuario.username }}</td>
+        </tr>
+        <tr>
+            <th>Tipo</th>
+            <td>{{ feedback.get_tipo_display }}</td>
+        </tr>
+        <tr>
+            <th>Mensagem</th>
+            <td>{{ feedback.mensagem }}</td>
+        </tr>
+        <tr>
+            <th>Enviado em</th>
+            <td>{{ feedback.criado_em|date:"d/m/Y H:i" }}</td>
+        </tr>
+        <tr>
+            <th>Respondido</th>
+            <td>{% if feedback.respondido %}Sim{% else %}Não{% endif %}</td>
+        </tr>
+    </table>
+
+    <p><a class="btn" href="{% url 'feedback_list' %}">&larr; Voltar</a></p>
+{% endblock %}

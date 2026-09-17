@@ -29,5 +29,6 @@ urlpatterns = [
     path('funcionarios/', include('funcionario.urls')),
     path('pedidos/', include('pedido.urls')),
     path('itempedidos/', include('itempedido.urls')),
+    path('feedbacks/', include('feedback.urls')),
     path('', RedirectView.as_view(pattern_name='item_list'), name='home'),
 ]

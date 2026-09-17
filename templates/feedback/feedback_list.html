@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Feedbacks{% endblock %}
+{% block content %}
+    {% if todos %}
+        <h1>Feedbacks recebidos</h1>
+    {% else %}
+        <h1>Meus feedbacks</h1>
+    {% endif %}
+
+    <a class="btn" href="{% url 'feedback_create' %}">+ Enviar feedback</a>
+
+    {% if feedbacks %}
+        <table>
+            <tr>
+                {% if todos %}<th>Usuário</th>{% endif %}
+                <th>Tipo</th>
+                <th>Mensagem</th>
+                <th>Enviado em</th>
+                <th>Respondido</th>
+                <th></th>
+            </tr>
+            {% for feedback in feedbacks %}
+                <tr>
+                    {% if todos %}<td>{{ feedback.usuario.get_full_name|default:feedback.usuario.username }}</td>{% endif %}
+                    <td>{{ feedback.get_tipo_display }}</td>
+                    <td>{{ feedback.mensagem|truncatechars:60 }}</td>
+                    <td>{{ feedback.criado_em|date:"d/m/Y H:i" }}</td>
+                    <td>{% if feedback.respondido %}Sim{% else %}Não{% endif %}</td>
+                    <td><a href="{% url 'feedback_detail' feedback.pk %}">Detalhes</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="empty">Nenhum feedback enviado ainda.</p>
+    {% endif %}
+{% endblock %}

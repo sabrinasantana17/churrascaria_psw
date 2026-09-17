@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Enviar feedback{% endblock %}
+{% block content %}
+    <h1>Enviar feedback</h1>
+    <p class="empty">Sua opinião ajuda a melhorar o sistema. Conte o que está bom e o que pode melhorar.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label>Usuário</label>
+            <input type="text" value="{{ user.get_full_name|default:user.username }}" readonly>
+        </p>
+        {{ form.as_p }}
+        <button class="btn" type="submit">Enviar feedback</button>
+        <a class="btn" href="{% url 'feedback_list' %}">Cancelar</a>
+    </form>
+{% endblock %}
