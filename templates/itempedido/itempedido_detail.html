@@ -1,30 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}Item do pedido #{{ item_pedido.id }}{% endblock %}
 {% block content %}
-    <h1>Item do pedido #{{ item_pedido.id }}</h1>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-list-ul"></i>Item do pedido #{{ item_pedido.id }}</h1>
 
-    <table>
-        <tr>
-            <th>Pedido</th>
-            <td><a href="{% url 'pedido_detail' item_pedido.pedido_id %}">Pedido #{{ item_pedido.pedido_id }}</a></td>
-        </tr>
-        <tr>
-            <th>Item</th>
-            <td><a href="{% url 'item_detail' item_pedido.item_id %}">{{ item_pedido.item }}</a></td>
-        </tr>
-        <tr>
-            <th>Quantidade</th>
-            <td>{{ item_pedido.quantidade }}</td>
-        </tr>
-        <tr>
-            <th>Preço (conjunto)</th>
-            <td>R$ {{ item_pedido.preco_conjunto }}</td>
-        </tr>
-        <tr>
-            <th>Observação</th>
-            <td>{{ item_pedido.observacao|default:"—" }}</td>
-        </tr>
-    </table>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-borderless table-detalhe mb-0">
+                <tr><th>Pedido</th><td><a href="{% url 'pedido_detail' item_pedido.pedido_id %}">Pedido #{{ item_pedido.pedido_id }}</a></td></tr>
+                <tr><th>Item</th><td><a href="{% url 'item_detail' item_pedido.item_id %}">{{ item_pedido.item }}</a></td></tr>
+                <tr><th>Quantidade</th><td>{{ item_pedido.quantidade }}</td></tr>
+                <tr><th>Preço (conjunto)</th><td>R$ {{ item_pedido.preco_conjunto }}</td></tr>
+                <tr><th>Observação</th><td>{{ item_pedido.observacao|default:"—" }}</td></tr>
+            </table>
+        </div>
+    </div>
 
-    <p><a class="btn" href="{% url 'itempedido_list' %}">&larr; Voltar</a></p>
+    <a class="btn btn-secondary" href="{% url 'itempedido_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
 {% endblock %}

@@ -1,3 +1,9 @@
+/* ==========================================================================
+   Tema "Churrascaria" sobre o SB Admin 2
+   Paleta: brasa (vermelho/laranja), carvão (preto/grafite) e dourado.
+   Este arquivo só sobrescreve variáveis/classes do sb-admin-2.min.css,
+   então ele deve ser carregado DEPOIS dele no base.html.
+   ========================================================================== */
 
 :root {
     --churrasco-brasa: #8a1f11;      /* vermelho-brasa (cor principal) */

@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Novo item do pedido{% endblock %}
 {% block content %}
-    <h1>Novo item do pedido</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn" type="submit">Salvar</button>
-    </form>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-list-ul"></i>Novo item do pedido</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="post" class="django-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i>Salvar</button>
+                <a class="btn btn-secondary" href="{% url 'itempedido_list' %}">Cancelar</a>
+            </form>
+        </div>
+    </div>
 {% endblock %}

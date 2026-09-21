@@ -1,33 +1,54 @@
 {% extends 'base.html' %}
 {% block title %}Pedidos{% endblock %}
 {% block content %}
-    <h1>Pedidos</h1>
-    <a class="btn" href="{% url 'pedido_create' %}">+ Novo pedido</a>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800 page-title"><i class="fas fa-receipt"></i>Pedidos</h1>
+        <a class="btn btn-primary btn-sm shadow-sm" href="{% url 'pedido_create' %}">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Novo pedido
+        </a>
+    </div>
 
-    {% if pedidos %}
-        <table>
-            <tr>
-    <th>#</th>
-    <th>Cliente</th>
-    <th>Funcionário</th>
-    <th>Pago</th>
-    <th>Criado em</th>
-    <th>Total</th>
-    <th></th>
-</tr>
-{% for pedido in pedidos %}
-    <tr>
-        <td>{{ pedido.id }}</td>
-        <td>{{ pedido.cliente }}</td>
-        <td>{{ pedido.funcionario|default:"—" }}</td>
-        <td>{% if pedido.pagamento_efetuado %}Sim{% else %}Não{% endif %}</td>
-        <td>{{ pedido.criado_em }}</td>
-        <td>R$ {{ pedido.valor_total }}</td>
-        <td><a href="{% url 'pedido_detail' pedido.pk %}">Detalhes</a></td>
-    </tr>
-{% endfor %}
-        </table>
-    {% else %}
-        <p class="empty">Nenhum pedido cadastrado ainda.</p>
-    {% endif %}
+    <div class="card shadow card-espeto">
+        <div class="card-header py-3"><i class="fas fa-clipboard-list mr-2"></i>Lista de pedidos</div>
+        <div class="card-body">
+            {% if pedidos %}
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover datatable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cliente</th>
+                                <th>Funcionário</th>
+                                <th>Pago</th>
+                                <th>Criado em</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pedido in pedidos %}
+                                <tr>
+                                    <td>{{ pedido.id }}</td>
+                                    <td>{{ pedido.cliente }}</td>
+                                    <td>{{ pedido.funcionario|default:"—" }}</td>
+                                    <td>
+                                        {% if pedido.pagamento_efetuado %}
+                                            <span class="badge badge-success">Sim</span>
+                                        {% else %}
+                                            <span class="badge badge-warning">Não</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ pedido.criado_em }}</td>
+                                    <td>R$ {{ pedido.valor_total }}</td>
+                                    <td><a class="btn btn-warning btn-sm" href="{% url 'pedido_detail' pedido.pk %}"><i class="fas fa-eye"></i> Detalhes</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted font-italic mb-0">Nenhum pedido cadastrado ainda.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

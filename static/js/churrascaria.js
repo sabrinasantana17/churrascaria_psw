@@ -1,4 +1,9 @@
-
+/*
+ * churrascaria.js
+ * Pequenos ajustes para o tema SB Admin 2 funcionar bem com os forms
+ * padrão do Django ({{ form.as_p }}) sem precisar instalar pacotes extras
+ * (django-widget-tweaks / crispy-forms).
+ */
 (function () {
     "use strict";
 

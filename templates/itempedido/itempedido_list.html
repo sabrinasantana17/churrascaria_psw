@@ -1,31 +1,46 @@
 {% extends 'base.html' %}
 {% block title %}Itens do pedido{% endblock %}
 {% block content %}
-    <h1>Itens do pedido</h1>
-    <a class="btn" href="{% url 'itempedido_create' %}">+ Novo item de pedido</a>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800 page-title"><i class="fas fa-list-ul"></i>Itens do pedido</h1>
+        <a class="btn btn-primary btn-sm shadow-sm" href="{% url 'itempedido_create' %}">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Novo item de pedido
+        </a>
+    </div>
 
-    {% if itens_pedido %}
-        <table>
-            <tr>
-    <th>Pedido</th>
-    <th>Item</th>
-    <th>Qtd</th>
-    <th>Preço (conjunto)</th>
-    <th>Observação</th>
-    <th></th>
-</tr>
-{% for ip in itens_pedido %}
-    <tr>
-        <td>#{{ ip.pedido_id }}</td>
-        <td>{{ ip.item }}</td>
-        <td>{{ ip.quantidade }}</td>
-        <td>R$ {{ ip.preco_conjunto }}</td>
-        <td>{{ ip.observacao|default:"—" }}</td>
-        <td><a href="{% url 'itempedido_detail' ip.pk %}">Detalhes</a></td>
-    </tr>
-{% endfor %}
-        </table>
-    {% else %}
-        <p class="empty">Nenhum item de pedido cadastrado ainda.</p>
-    {% endif %}
+    <div class="card shadow card-espeto">
+        <div class="card-header py-3"><i class="fas fa-th-list mr-2"></i>Lista de itens do pedido</div>
+        <div class="card-body">
+            {% if itens_pedido %}
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover datatable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Item</th>
+                                <th>Qtd</th>
+                                <th>Preço (conjunto)</th>
+                                <th>Observação</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ip in itens_pedido %}
+                                <tr>
+                                    <td>#{{ ip.pedido_id }}</td>
+                                    <td>{{ ip.item }}</td>
+                                    <td>{{ ip.quantidade }}</td>
+                                    <td>R$ {{ ip.preco_conjunto }}</td>
+                                    <td>{{ ip.observacao|default:"—" }}</td>
+                                    <td><a class="btn btn-warning btn-sm" href="{% url 'itempedido_detail' ip.pk %}"><i class="fas fa-eye"></i> Detalhes</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted font-italic mb-0">Nenhum item de pedido cadastrado ainda.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
