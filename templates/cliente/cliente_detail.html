@@ -1,30 +1,28 @@
 {% extends 'base.html' %}
 {% block title %}{{ cliente.get_full_name|default:cliente.username }}{% endblock %}
 {% block content %}
-    <h1>{{ cliente.get_full_name|default:cliente.username }}</h1>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-user"></i>{{ cliente.get_full_name|default:cliente.username }}</h1>
 
-    <table>
-        <tr>
-            <th>Usuário</th>
-            <td>{{ cliente.username }}</td>
-        </tr>
-        <tr>
-            <th>Nome</th>
-            <td>{{ cliente.get_full_name|default:"—" }}</td>
-        </tr>
-        <tr>
-            <th>E-mail</th>
-            <td>{{ cliente.email|default:"—" }}</td>
-        </tr>
-        <tr>
-            <th>Telefone</th>
-            <td>{{ cliente.telefone|default:"—" }}</td>
-        </tr>
-        <tr>
-            <th>Conta ativa</th>
-            <td>{% if cliente.is_active %}Sim{% else %}Não{% endif %}</td>
-        </tr>
-    </table>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-borderless table-detalhe mb-0">
+                <tr><th>Usuário</th><td>{{ cliente.username }}</td></tr>
+                <tr><th>Nome</th><td>{{ cliente.get_full_name|default:"—" }}</td></tr>
+                <tr><th>E-mail</th><td>{{ cliente.email|default:"—" }}</td></tr>
+                <tr><th>Telefone</th><td>{{ cliente.telefone|default:"—" }}</td></tr>
+                <tr>
+                    <th>Conta ativa</th>
+                    <td>
+                        {% if cliente.is_active %}
+                            <span class="badge badge-success">Sim</span>
+                        {% else %}
+                            <span class="badge badge-secondary">Não</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-    <p><a class="btn" href="{% url 'cliente_list' %}">&larr; Voltar</a></p>
+    <a class="btn btn-secondary" href="{% url 'cliente_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
 {% endblock %}

@@ -1,0 +1,197 @@
+
+:root {
+    --churrasco-brasa: #8a1f11;      /* vermelho-brasa (cor principal) */
+    --churrasco-brasa-escura: #5c140a;
+    --churrasco-fogo: #e8590c;       /* laranja fogo (destaque/hover) */
+    --churrasco-dourado: #d4a02a;    /* dourado (detalhes, ícones ativos) */
+    --churrasco-carvao: #201a16;     /* preto-carvão (sidebar) */
+    --churrasco-carvao-claro: #2c241f;
+    --churrasco-creme: #f7f2ea;      /* fundo bege claro do conteúdo */
+}
+
+body {
+    background-color: var(--churrasco-creme);
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* ---------- Sidebar (madeira/carvão) ---------- */
+.sidebar {
+    background: linear-gradient(180deg, var(--churrasco-carvao) 0%, var(--churrasco-carvao-claro) 100%) !important;
+}
+
+.sidebar .sidebar-brand {
+    color: var(--churrasco-dourado) !important;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.06rem;
+}
+
+.sidebar .sidebar-brand-icon i {
+    color: var(--churrasco-fogo);
+}
+
+.sidebar hr.sidebar-divider {
+    border-top: 1px solid rgba(212, 160, 42, 0.25);
+}
+
+.sidebar .sidebar-heading {
+    color: rgba(212, 160, 42, 0.65);
+}
+
+.sidebar .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.sidebar .nav-item .nav-link i {
+    color: var(--churrasco-dourado);
+}
+
+.sidebar .nav-item .nav-link:hover,
+.sidebar .nav-item.active .nav-link {
+    color: #fff;
+    background-color: rgba(232, 89, 12, 0.18);
+}
+
+.sidebar .nav-item.active .nav-link i {
+    color: var(--churrasco-fogo);
+}
+
+#sidebarToggle {
+    background-color: rgba(212, 160, 42, 0.15);
+}
+#sidebarToggle:hover {
+    background-color: rgba(212, 160, 42, 0.3);
+}
+
+/* ---------- Topbar ---------- */
+.topbar {
+    background: linear-gradient(90deg, var(--churrasco-brasa) 0%, var(--churrasco-brasa-escura) 100%) !important;
+}
+
+.topbar .navbar-search input {
+    border: none;
+}
+
+.topbar .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.topbar-divider {
+    border-right: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+/* ---------- Cores institucionais (botões, links, badges) ---------- */
+.btn-primary,
+.badge-primary {
+    background-color: var(--churrasco-brasa);
+    border-color: var(--churrasco-brasa);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--churrasco-brasa-escura) !important;
+    border-color: var(--churrasco-brasa-escura) !important;
+}
+
+.btn-warning,
+.badge-warning {
+    background-color: var(--churrasco-dourado);
+    border-color: var(--churrasco-dourado);
+    color: #3a2c05;
+}
+.btn-warning:hover {
+    background-color: #b8871e;
+    border-color: #b8871e;
+    color: #fff;
+}
+
+a {
+    color: var(--churrasco-brasa);
+}
+a:hover {
+    color: var(--churrasco-fogo);
+}
+
+.text-primary { color: var(--churrasco-brasa) !important; }
+.bg-primary   { background-color: var(--churrasco-brasa) !important; }
+
+/* ---------- Cards ---------- */
+.card {
+    border: none;
+    border-radius: 0.55rem;
+    box-shadow: 0 0.15rem 1.2rem 0 rgba(58, 32, 20, 0.12);
+}
+.card-header {
+    background-color: #fff;
+    border-bottom: 2px solid var(--churrasco-dourado);
+    border-radius: 0.55rem 0.55rem 0 0 !important;
+    font-weight: 700;
+    color: var(--churrasco-brasa-escura);
+}
+
+/* Linha decorativa "espeto" no topo dos cards de destaque */
+.card.card-espeto {
+    border-top: 4px solid var(--churrasco-fogo);
+}
+
+/* ---------- Tabelas ---------- */
+.table thead th {
+    background-color: var(--churrasco-brasa);
+    color: #fff;
+    border-color: var(--churrasco-brasa-escura);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(232, 89, 12, 0.07);
+}
+
+/* ---------- Página de login / cadastro ---------- */
+.bg-churrasco-gradient {
+    background: radial-gradient(circle at top left, var(--churrasco-fogo) 0%, var(--churrasco-brasa) 45%, var(--churrasco-carvao) 100%) !important;
+    min-height: 100vh;
+}
+
+.churrasco-login-side {
+    background: linear-gradient(160deg, var(--churrasco-carvao) 0%, var(--churrasco-brasa-escura) 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+.churrasco-login-side i {
+    font-size: 3.5rem;
+    color: var(--churrasco-dourado);
+    margin-bottom: 1rem;
+}
+.churrasco-login-side h2 {
+    font-weight: 800;
+    letter-spacing: 0.03rem;
+}
+
+.btn-user {
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+}
+
+/* ---------- Rodapé ---------- */
+.sticky-footer {
+    background-color: #fff;
+    border-top: 3px solid var(--churrasco-dourado);
+}
+
+/* ---------- Detalhe (chave/valor) ---------- */
+.table-detalhe th {
+    width: 220px;
+    background-color: #fbf3e3;
+    color: var(--churrasco-brasa-escura);
+}
+
+/* Ícone decorativo ao lado dos títulos de página */
+.page-title i {
+    color: var(--churrasco-fogo);
+    margin-right: 0.5rem;
+}

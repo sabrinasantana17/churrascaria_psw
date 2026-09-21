@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Entrar{% endblock %} · Churrascaria</title>
+
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/churrascaria-theme.css' %}" rel="stylesheet">
+</head>
+<body class="bg-churrasco-gradient">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-flex churrasco-login-side">
+                            <div>
+                                <i class="fas fa-fire"></i>
+                                <h2>Churrascaria</h2>
+                                <p class="mb-0">Sistema de gestão de pedidos, cardápio e equipe.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                                            {{ message }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% block content %}{% endblock %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+<script src="{% static 'js/churrascaria.js' %}"></script>
+</body>
+</html>

@@ -1,26 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}{{ item.nome }}{% endblock %}
 {% block content %}
-    <h1>{{ item.nome }}</h1>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-drumstick-bite"></i>{{ item.nome }}</h1>
 
-    <table>
-        <tr>
-            <th>Categoria</th>
-            <td>{{ item.get_categoria_display }}</td>
-        </tr>
-        <tr>
-            <th>Preço</th>
-            <td>R$ {{ item.preco }}</td>
-        </tr>
-        <tr>
-            <th>Disponível</th>
-            <td>{% if item.disponivel %}Sim{% else %}Não{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Descrição</th>
-            <td>{{ item.descricao|default:"—" }}</td>
-        </tr>
-    </table>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-borderless table-detalhe mb-0">
+                <tr><th>Categoria</th><td>{{ item.get_categoria_display }}</td></tr>
+                <tr><th>Preço</th><td>R$ {{ item.preco }}</td></tr>
+                <tr>
+                    <th>Disponível</th>
+                    <td>
+                        {% if item.disponivel %}
+                            <span class="badge badge-success">Sim</span>
+                        {% else %}
+                            <span class="badge badge-secondary">Não</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr><th>Descrição</th><td>{{ item.descricao|default:"—" }}</td></tr>
+            </table>
+        </div>
+    </div>
 
-    <p><a class="btn" href="{% url 'item_list' %}">&larr; Voltar</a></p>
+    <a class="btn btn-secondary" href="{% url 'item_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
 {% endblock %}

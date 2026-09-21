@@ -1,29 +1,44 @@
 {% extends 'base.html' %}
 {% block title %}Clientes{% endblock %}
 {% block content %}
-    <h1>Clientes</h1>
-    <a class="btn" href="{% url 'cliente_create' %}">+ Novo cliente</a>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800 page-title"><i class="fas fa-users"></i>Clientes</h1>
+        <a class="btn btn-primary btn-sm shadow-sm" href="{% url 'cliente_create' %}">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Novo cliente
+        </a>
+    </div>
 
-    {% if clientes %}
-        <table>
-            <tr>
-                <th>Usuário</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th></th>
-            </tr>
-            {% for cliente in clientes %}
-                <tr>
-                    <td>{{ cliente.username }}</td>
-                    <td>{{ cliente.get_full_name }}</td>
-                    <td>{{ cliente.email }}</td>
-                    <td>{{ cliente.telefone }}</td>
-                    <td><a href="{% url 'cliente_detail' cliente.pk %}">Detalhes</a></td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p class="empty">Nenhum cliente cadastrado ainda.</p>
-    {% endif %}
+    <div class="card shadow card-espeto">
+        <div class="card-header py-3"><i class="fas fa-address-book mr-2"></i>Lista de clientes</div>
+        <div class="card-body">
+            {% if clientes %}
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover datatable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Usuário</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Telefone</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                                <tr>
+                                    <td>{{ cliente.username }}</td>
+                                    <td>{{ cliente.get_full_name }}</td>
+                                    <td>{{ cliente.email }}</td>
+                                    <td>{{ cliente.telefone }}</td>
+                                    <td><a class="btn btn-warning btn-sm" href="{% url 'cliente_detail' cliente.pk %}"><i class="fas fa-eye"></i> Detalhes</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted font-italic mb-0">Nenhum cliente cadastrado ainda.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
