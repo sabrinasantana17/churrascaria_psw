@@ -198,6 +198,7 @@ Ao permitir que o pedido seja montado no próprio sistema, com cálculo automát
 Desenvolvimento do software:
 
 **Sabrina Santana de Souza**
+
 **Vinícius Pires Silveira**  
 Turma 3AII — Curso Técnico em Informática para Internet — IF Baiano, Campus Guanambi-BA
 
