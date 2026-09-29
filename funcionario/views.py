@@ -1,17 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import Group
 from .models import Funcionario
 from .forms import FuncionarioForm
+from .grupo import garantir_grupo_funcionario
 
 
 def _adicionar_ao_grupo_cargo(funcionario):
     """Garante que todo Funcionario criado entre no grupo do seu cargo
-    (Gerente, Garçom ou Cozinheiro)."""
-    nome_grupo = funcionario.get_cargo_display()  # 'Gerente' / 'Garçom' / 'Cozinheiro'
-    grupo, _ = Group.objects.get_or_create(name=nome_grupo)
-    funcionario.groups.add(grupo)
+    (Gerente, Garçom ou Cozinheiro), com as permissões básicas."""
+    garantir_grupo_funcionario(funcionario)
 
 
 @login_required

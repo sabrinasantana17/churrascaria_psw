@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import Group
 from .models import Cliente
 from .forms import ClienteForm
+from .grupo import garantir_grupo_cliente
 
 
 def _adicionar_ao_grupo_cliente(usuario):
-    """Garante que todo Cliente criado já entre no grupo 'Cliente'."""
-    grupo, _ = Group.objects.get_or_create(name='Cliente')
-    usuario.groups.add(grupo)
+    """Garante que todo Cliente criado já entre no grupo 'Cliente' (com as permissões dele)."""
+    garantir_grupo_cliente(usuario)
 
 
 @login_required

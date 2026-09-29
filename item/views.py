@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+from pedido.acesso import pode_montar_pedido
 from .models import Item
 from .forms import ItemForm
 
@@ -8,7 +9,10 @@ from .forms import ItemForm
 @permission_required('item.view_item', raise_exception=True)
 def item_list(request):
     itens = Item.objects.all().order_by('nome')
-    return render(request, 'item/item_list.html', {'itens': itens})
+    return render(request, 'item/item_list.html', {
+        'itens': itens,
+        'pode_montar_pedido': pode_montar_pedido(request.user),
+    })
 
 
 @login_required
