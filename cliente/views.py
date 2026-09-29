@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+<<<<<<< HEAD
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao, manter_login_apos_trocar_senha
+=======
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
 from .models import Cliente
 from .forms import ClienteForm
 from .grupo import garantir_grupo_cliente
@@ -12,6 +15,7 @@ from .grupo import garantir_grupo_cliente
 def _adicionar_ao_grupo_cliente(usuario):
     """Garante que todo Cliente criado já entre no grupo 'Cliente' (com as permissões dele)."""
     garantir_grupo_cliente(usuario)
+<<<<<<< HEAD
 
 
 # Regra: a equipe usa as permissões do grupo; o cliente sempre pode ver, editar
@@ -30,6 +34,8 @@ def pode_alterar_cliente(usuario, cliente):
 
 def pode_excluir_cliente(usuario, cliente):
     return usuario.has_perm('cliente.delete_cliente') or _e_o_proprio(usuario, cliente)
+=======
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
 
 
 @login_required

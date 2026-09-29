@@ -73,7 +73,11 @@
                         <tfoot>
                             <tr>
                                 <th colspan="3" class="text-right">Total do pedido</th>
+<<<<<<< HEAD
                                 <th colspan="{% if mostrar_acoes_itens %}3{% else %}2{% endif %}">R$ {{ pedido.valor_total }}</th>
+=======
+                                <th colspan="2">R$ {{ pedido.valor_total }}</th>
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
                             </tr>
                         </tfoot>
                     </table>
@@ -93,11 +97,14 @@
     {% elif pode_montar and pedido.concluido %}
         <a class="btn btn-success" href="{% url 'item_list' %}"><i class="fas fa-plus mr-1"></i>Fazer novo pedido</a>
     {% endif %}
+<<<<<<< HEAD
     {% if pode_alterar %}
         <a class="btn btn-info" href="{% url 'pedido_update' pedido.pk %}"><i class="fas fa-edit mr-1"></i>Editar pedido</a>
     {% endif %}
     {% if pode_excluir %}
         <a class="btn btn-danger" href="{% url 'pedido_delete' pedido.pk %}"><i class="fas fa-trash-alt mr-1"></i>{% if eh_cliente %}Cancelar pedido{% else %}Excluir pedido{% endif %}</a>
     {% endif %}
+=======
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
     <a class="btn btn-secondary" href="{% url 'pedido_list' %}"><i class="fas fa-arrow-left mr-1"></i>{% if eh_cliente %}Meus pedidos{% else %}Voltar{% endif %}</a>
 {% endblock %}

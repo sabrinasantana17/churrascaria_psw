@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+<<<<<<< HEAD
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao
@@ -13,6 +14,14 @@ from pedido.acesso import (
 from pedido.models import Pedido
 from .models import ItemPedido
 from .forms import ItemPedidoForm, ItemPedidoEditForm, AdicionarItemForm
+=======
+from cliente.models import Cliente
+from item.models import Item
+from pedido.acesso import pode_montar_pedido
+from pedido.models import Pedido
+from .models import ItemPedido
+from .forms import ItemPedidoForm, AdicionarItemForm
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
 
 @login_required
 @permission_required('itempedido.view_itempedido', raise_exception=True)
@@ -40,6 +49,7 @@ def itempedido_detail(request, pk):
     return render(request, 'itempedido/itempedido_detail.html', {'item_pedido': item_pedido})
 
 
+<<<<<<< HEAD
 def _negar(request, item_pedido):
     """Cliente dono de pedido já enviado leva uma mensagem; os demais, 403."""
     if item_pedido.pedido.concluido and e_dono_do_pedido(request.user, item_pedido.pedido):
@@ -81,6 +91,8 @@ def itempedido_delete(request, pk):
     )
 
 
+=======
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
 def _pedido_atual(cliente):
     """Pedido que o cliente ainda está montando (não concluído), se existir."""
     return Pedido.objects.filter(cliente=cliente, concluido=False).order_by('-criado_em').first()

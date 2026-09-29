@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+<<<<<<< HEAD
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao
@@ -9,6 +10,9 @@ from .acesso import (
     pode_alterar_item_pedido, pode_excluir_item_pedido,
 )
 from .forms import PedidoEditForm
+=======
+from .acesso import pode_montar_pedido
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
 from .models import Pedido
 
 @login_required
@@ -22,10 +26,13 @@ def pedido_list(request):
         # Equipe/administradores veem todos os pedidos, do mais recente para o
         # mais antigo (a coluna Status mostra se está em andamento ou enviado).
         pedidos = Pedido.objects.all().order_by('-criado_em')
+<<<<<<< HEAD
     pedidos = list(pedidos.select_related('cliente', 'funcionario'))
     for pedido in pedidos:
         pedido.pode_alterar = pode_alterar_pedido(request.user, pedido)
         pedido.pode_excluir = pode_excluir_pedido(request.user, pedido)
+=======
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
     return render(request, 'pedido/pedido_list.html', {
         'pedidos': pedidos,
         'eh_cliente': eh_cliente,
@@ -48,15 +55,20 @@ def pedido_detail(request, pk):
     if eh_cliente and pedido.cliente_id != request.user.cliente.id:
         messages.error(request, 'Você não tem permissão para ver esse pedido.')
         return redirect('pedido_list')
+<<<<<<< HEAD
     itens_do_pedido = list(pedido.itempedido_set.select_related('item', 'pedido').all())
     for ip in itens_do_pedido:
         ip.pode_alterar = pode_alterar_item_pedido(request.user, ip)
         ip.pode_excluir = pode_excluir_item_pedido(request.user, ip)
+=======
+    itens_do_pedido = pedido.itempedido_set.select_related('item').all()
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
     return render(request, 'pedido/pedido_detail.html', {
         'pedido': pedido,
         'itens_do_pedido': itens_do_pedido,
         'eh_cliente': eh_cliente,
         'pode_montar': pode_montar_pedido(request.user),
+<<<<<<< HEAD
         'pode_alterar': pode_alterar_pedido(request.user, pedido),
         'pode_excluir': pode_excluir_pedido(request.user, pedido),
         'mostrar_acoes_itens': any(ip.pode_alterar or ip.pode_excluir for ip in itens_do_pedido),
@@ -98,6 +110,10 @@ def pedido_delete(request, pk):
         bloqueio_msg='Não foi possível excluir esse pedido.',
     )
 
+=======
+    })
+
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
 @login_required
 def concluir_pedido(request, pk):
     """Confirma o pedido: a partir daqui ele foi enviado e não recebe mais itens.

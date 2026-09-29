@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+<<<<<<< HEAD
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao, manter_login_apos_trocar_senha
 from .models import Funcionario
 from .forms import FuncionarioForm
 from .grupo import garantir_grupo_funcionario, atualizar_grupo_funcionario
+=======
+from .models import Funcionario
+from .forms import FuncionarioForm
+from .grupo import garantir_grupo_funcionario
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
 
 
 def _adicionar_ao_grupo_cargo(funcionario):

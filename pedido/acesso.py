@@ -2,6 +2,7 @@ def pode_montar_pedido(usuario):
     """Quem pode montar pedidos pelo cardápio: o próprio cliente ou qualquer
     funcionário/administrador com a permissão de criar pedidos."""
     return hasattr(usuario, 'cliente') or usuario.has_perm('pedido.add_pedido')
+<<<<<<< HEAD
 
 
 def e_dono_do_pedido(usuario, pedido):
@@ -35,3 +36,5 @@ def pode_excluir_item_pedido(usuario, item_pedido):
         return True
     pedido = item_pedido.pedido
     return e_dono_do_pedido(usuario, pedido) and not pedido.concluido
+=======
+>>>>>>> f2b373a033f1ba172e6d374f236fdae65653d641
