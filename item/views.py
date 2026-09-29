@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
 from pedido.acesso import pode_montar_pedido
 from .models import Item
 from .forms import ItemForm
@@ -37,7 +36,6 @@ def item_create(request):
 def item_detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
     return render(request, 'item/item_detail.html', {'item': item})
-@login_required
 
 
 @login_required
@@ -69,4 +67,3 @@ def item_delete(request, pk):
         bloqueio_msg='Esse item já aparece em pedidos e não pode ser excluído. '
                      'Edite-o e desmarque "Disponível" para tirá-lo do cardápio.',
     )
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37

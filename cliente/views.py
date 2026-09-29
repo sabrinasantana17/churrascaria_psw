@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao, manter_login_apos_trocar_senha
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
 from .models import Cliente
 from .forms import ClienteForm
 from .grupo import garantir_grupo_cliente
@@ -31,7 +30,6 @@ def pode_alterar_cliente(usuario, cliente):
 
 def pode_excluir_cliente(usuario, cliente):
     return usuario.has_perm('cliente.delete_cliente') or _e_o_proprio(usuario, cliente)
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
 
 
 @login_required

@@ -4,16 +4,11 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao
-from django.core.exceptions import PermissionDenied
-from django.urls import reverse
-from churrascaria.utils import confirmar_exclusao
 from .acesso import (
     pode_montar_pedido, e_dono_do_pedido, pode_alterar_pedido, pode_excluir_pedido,
     pode_alterar_item_pedido, pode_excluir_item_pedido,
 )
 from .forms import PedidoEditForm
-from .acesso import pode_montar_pedido
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
 from .models import Pedido
 
 @login_required
@@ -31,11 +26,6 @@ def pedido_list(request):
     for pedido in pedidos:
         pedido.pode_alterar = pode_alterar_pedido(request.user, pedido)
         pedido.pode_excluir = pode_excluir_pedido(request.user, pedido)
-    pedidos = list(pedidos.select_related('cliente', 'funcionario'))
-    for pedido in pedidos:
-        pedido.pode_alterar = pode_alterar_pedido(request.user, pedido)
-        pedido.pode_excluir = pode_excluir_pedido(request.user, pedido)
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
     return render(request, 'pedido/pedido_list.html', {
         'pedidos': pedidos,
         'eh_cliente': eh_cliente,
@@ -62,20 +52,11 @@ def pedido_detail(request, pk):
     for ip in itens_do_pedido:
         ip.pode_alterar = pode_alterar_item_pedido(request.user, ip)
         ip.pode_excluir = pode_excluir_item_pedido(request.user, ip)
-    itens_do_pedido = list(pedido.itempedido_set.select_related('item', 'pedido').all())
-    for ip in itens_do_pedido:
-        ip.pode_alterar = pode_alterar_item_pedido(request.user, ip)
-        ip.pode_excluir = pode_excluir_item_pedido(request.user, ip)
-    itens_do_pedido = pedido.itempedido_set.select_related('item').all()
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
     return render(request, 'pedido/pedido_detail.html', {
         'pedido': pedido,
         'itens_do_pedido': itens_do_pedido,
         'eh_cliente': eh_cliente,
         'pode_montar': pode_montar_pedido(request.user),
-        'pode_alterar': pode_alterar_pedido(request.user, pedido),
-        'pode_excluir': pode_excluir_pedido(request.user, pedido),
-        'mostrar_acoes_itens': any(ip.pode_alterar or ip.pode_excluir for ip in itens_do_pedido),
         'pode_alterar': pode_alterar_pedido(request.user, pedido),
         'pode_excluir': pode_excluir_pedido(request.user, pedido),
         'mostrar_acoes_itens': any(ip.pode_alterar or ip.pode_excluir for ip in itens_do_pedido),
@@ -117,8 +98,6 @@ def pedido_delete(request, pk):
         bloqueio_msg='Não foi possível excluir esse pedido.',
     )
 
-    })
->>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
 @login_required
 def concluir_pedido(request, pk):
     """Confirma o pedido: a partir daqui ele foi enviado e não recebe mais itens.
