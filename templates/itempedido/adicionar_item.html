@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load l10n %}
+{% block title %}Itens do pedido{% endblock %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-list-ul"></i>Itens do pedido</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3"><i class="fas fa-utensils mr-2"></i>{{ item.nome }}</div>
+        <div class="card-body">
+            {% if item.descricao %}<p class="text-muted">{{ item.descricao }}</p>{% endif %}
+            <form method="post" class="django-form" id="form-item-pedido" data-preco="{{ item.preco|unlocalize }}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <table class="table table-bordered w-auto mb-3">
+                    <tr><th>Preço unitário</th><td>R$ {{ item.preco }}</td></tr>
+                    <tr><th>Quantidade</th><td id="calc-qtd">1</td></tr>
+                    <tr><th>Valor (preço × quantidade)</th><td id="calc-total" class="font-weight-bold">R$ {{ item.preco }}</td></tr>
+                </table>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i>Salvar</button>
+                <a class="btn btn-secondary" href="{% url 'item_list' %}">Cancelar</a>
+            </form>
+        </div>
+    </div>
+
+    {% if itens_do_pedido %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3"><i class="fas fa-receipt mr-2"></i>Já no seu pedido #{{ pedido.id }}</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered mb-0" width="100%" cellspacing="0">
+                    <thead>
+                        <tr><th>Item</th><th>Qtd</th><th>Preço unitário</th><th>Subtotal</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for ip in itens_do_pedido %}
+                            <tr>
+                                <td>{{ ip.item }}</td>
+                                <td>{{ ip.quantidade }}</td>
+                                <td>R$ {{ ip.item.preco }}</td>
+                                <td>R$ {{ ip.preco_conjunto }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3" class="text-right">Total do pedido</th>
+                            <th>R$ {{ pedido.valor_total }}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('form-item-pedido');
+    var campo = document.getElementById('id_quantidade');
+    var preco = parseFloat(form.dataset.preco);
+
+    function atualizar() {
+        var qtd = parseInt(campo.value, 10);
+        if (isNaN(qtd) || qtd < 1) { qtd = 0; }
+        document.getElementById('calc-qtd').textContent = qtd;
+        document.getElementById('calc-total').textContent =
+            (preco * qtd).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    campo.addEventListener('input', atualizar);
+    atualizar();
+});
+</script>
+{% endblock %}

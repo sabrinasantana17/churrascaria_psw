@@ -24,5 +24,14 @@
         </div>
     </div>
 
+    {% if pode_editar %}
+        <a class="btn btn-info" href="{% url 'feedback_update' feedback.pk %}"><i class="fas fa-edit mr-1"></i>Editar</a>
+    {% endif %}
+    {% if pode_responder %}
+        <a class="btn btn-info" href="{% url 'feedback_update' feedback.pk %}"><i class="fas fa-check mr-1"></i>Marcar como respondido</a>
+    {% endif %}
+    {% if pode_excluir %}
+        <a class="btn btn-danger" href="{% url 'feedback_delete' feedback.pk %}"><i class="fas fa-trash-alt mr-1"></i>Excluir</a>
+    {% endif %}
     <a class="btn btn-secondary" href="{% url 'feedback_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
 {% endblock %}

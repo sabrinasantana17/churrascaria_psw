@@ -26,3 +26,17 @@ class PedidoForm(forms.ModelForm):
             funcionario_do_usuario = getattr(user, 'funcionario', None)
             if funcionario_do_usuario is not None:
                 self.fields['funcionario'].initial = funcionario_do_usuario
+
+
+class PedidoEditForm(forms.ModelForm):
+    """Edição de um pedido pela equipe: quem atende, pagamento e status.
+    (O cliente do pedido não muda; os itens são editados à parte.)"""
+
+    class Meta:
+        model = Pedido
+        fields = ['funcionario', 'pagamento_efetuado', 'concluido']
+        labels = {
+            'funcionario': 'Funcionário',
+            'pagamento_efetuado': 'Pagamento efetuado',
+            'concluido': 'Pedido enviado (desmarque para reabrir e voltar a adicionar itens)',
+        }

@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}Novo item do pedido{% endblock %}
+{% block title %}{% if form.instance.pk %}Editar item do pedido{% else %}Novo item do pedido{% endif %}{% endblock %}
 {% block content %}
-    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-list-ul"></i>Novo item do pedido</h1>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-list-ul"></i>{% if form.instance.pk %}Editar item do pedido{% else %}Novo item do pedido{% endif %}</h1>
+    {% if form.instance.pk %}<p class="text-muted">Pedido #{{ form.instance.pedido_id }} &middot; {{ form.instance.item }} (R$ {{ form.instance.item.preco }} cada)</p>{% endif %}
     <div class="card shadow mb-4">
         <div class="card-body">
             <form method="post" class="django-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i>Salvar</button>
-                <a class="btn btn-secondary" href="{% url 'itempedido_list' %}">Cancelar</a>
+                <a class="btn btn-secondary" href="{% if form.instance.pk %}{% url 'pedido_detail' form.instance.pedido_id %}{% else %}{% url 'itempedido_list' %}{% endif %}">Cancelar</a>
             </form>
         </div>
     </div>

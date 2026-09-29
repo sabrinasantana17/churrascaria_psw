@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
-{% block title %}Enviar feedback{% endblock %}
+{% block title %}{% if modo == 'editar' %}Editar feedback{% elif modo == 'responder' %}Feedback #{{ feedback.pk }}{% else %}Enviar feedback{% endif %}{% endblock %}
 {% block content %}
-    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-comment-dots"></i>Enviar feedback</h1>
-    <p class="text-muted font-italic">Sua opinião ajuda a melhorar o sistema. Conte o que está bom e o que pode melhorar.</p>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-comment-dots"></i>{% if modo == 'editar' %}Editar feedback{% elif modo == 'responder' %}Feedback #{{ feedback.pk }}{% else %}Enviar feedback{% endif %}</h1>
+    {% if modo == 'novo' %}
+        <p class="text-muted font-italic">Sua opinião ajuda a melhorar o sistema. Conte o que está bom e o que pode melhorar.</p>
+    {% endif %}
 
     <div class="card shadow mb-4">
         <div class="card-body">
             <form method="post" class="django-form">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label>Usuário</label>
-                    <input type="text" class="form-control" value="{{ user.get_full_name|default:user.username }}" readonly>
-                </div>
+                {% if modo == 'responder' %}
+                    <p><strong>Usuário:</strong> {{ feedback.usuario.get_full_name|default:feedback.usuario.username }}</p>
+                    <p><strong>Tipo:</strong> {{ feedback.get_tipo_display }}</p>
+                    <p><strong>Mensagem:</strong> {{ feedback.mensagem }}</p>
+                {% else %}
+                    <div class="form-group">
+                        <label>Usuário</label>
+                        <input type="text" class="form-control" value="{% if feedback %}{{ feedback.usuario.get_full_name|default:feedback.usuario.username }}{% else %}{{ user.get_full_name|default:user.username }}{% endif %}" readonly>
+                    </div>
+                {% endif %}
                 {{ form.as_p }}
-                <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane mr-1"></i>Enviar feedback</button>
-                <a class="btn btn-secondary" href="{% url 'feedback_list' %}">Cancelar</a>
+                <button class="btn btn-primary" type="submit">
+                    {% if modo == 'novo' %}<i class="fas fa-paper-plane mr-1"></i>Enviar feedback{% else %}<i class="fas fa-save mr-1"></i>Salvar{% endif %}
+                </button>
+                <a class="btn btn-secondary" href="{% if feedback %}{% url 'feedback_detail' feedback.pk %}{% else %}{% url 'feedback_list' %}{% endif %}">Cancelar</a>
             </form>
         </div>
     </div>

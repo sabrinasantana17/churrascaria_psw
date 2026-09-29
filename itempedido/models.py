@@ -13,5 +13,15 @@ class ItemPedido(models.Model):
     class Meta:
         unique_together = ('pedido', 'item')
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # Sempre que um item entra/muda, o total do pedido é recalculado.
+        self.pedido.recalcular_total()
+
+    def delete(self, *args, **kwargs):
+        pedido = self.pedido
+        super().delete(*args, **kwargs)
+        pedido.recalcular_total()
+
     def __str__(self):
         return f"{self.quantidade}x {self.item.nome}"

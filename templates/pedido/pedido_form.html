@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}Novo pedido{% endblock %}
+{% block title %}Editar pedido #{{ pedido.pk }}{% endblock %}
 {% block content %}
-    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-receipt"></i>Novo pedido</h1>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-receipt"></i>Editar pedido #{{ pedido.pk }}</h1>
     <div class="card shadow mb-4">
         <div class="card-body">
+            <p><strong>Cliente:</strong> {{ pedido.cliente }} &middot; <strong>Total:</strong> R$ {{ pedido.valor_total }}</p>
             <form method="post" class="django-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i>Salvar</button>
-                <a class="btn btn-secondary" href="{% url 'pedido_list' %}">Cancelar</a>
+                <a class="btn btn-secondary" href="{% url 'pedido_detail' pedido.pk %}">Cancelar</a>
             </form>
         </div>
     </div>

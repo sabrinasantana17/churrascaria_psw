@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-trash-alt"></i>{{ titulo }}</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <p class="lead">Tem certeza que deseja excluir <strong>{{ objeto }}</strong>?</p>
+            {% if aviso %}<p class="text-muted">{{ aviso }}</p>{% endif %}
+            <p class="text-danger mb-4"><i class="fas fa-exclamation-triangle mr-1"></i>Essa ação não pode ser desfeita.</p>
+            <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt mr-1"></i>Sim, excluir</button>
+                <a class="btn btn-secondary" href="{{ cancelar_url }}">Cancelar</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
