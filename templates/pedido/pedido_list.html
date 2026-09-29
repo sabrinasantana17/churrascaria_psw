@@ -2,10 +2,12 @@
 {% block title %}Pedidos{% endblock %}
 {% block content %}
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800 page-title"><i class="fas fa-receipt"></i>Pedidos</h1>
-        <a class="btn btn-primary btn-sm shadow-sm" href="{% url 'pedido_create' %}">
-            <i class="fas fa-plus fa-sm text-white-50"></i> Novo pedido
+        <h1 class="h3 mb-0 text-gray-800 page-title"><i class="fas fa-receipt"></i>{% if eh_cliente %}Meus pedidos{% else %}Pedidos{% endif %}</h1>
+        {% if pode_montar %}
+        <a class="btn btn-primary btn-sm shadow-sm" href="{% url 'item_list' %}">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Fazer novo pedido
         </a>
+        {% endif %}
     </div>
 
     <div class="card shadow card-espeto">
@@ -13,12 +15,13 @@
         <div class="card-body">
             {% if pedidos %}
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover datatable" width="100%" cellspacing="0">
+                    <table class="table table-bordered table-hover datatable" width="100%" cellspacing="0" data-order='[[0, "desc"]]'>
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Cliente</th>
                                 <th>Funcionário</th>
+                                <th>Status</th>
                                 <th>Pago</th>
                                 <th>Criado em</th>
                                 <th>Total</th>
@@ -32,6 +35,13 @@
                                     <td>{{ pedido.cliente }}</td>
                                     <td>{{ pedido.funcionario|default:"—" }}</td>
                                     <td>
+                                        {% if pedido.concluido %}
+                                            <span class="badge badge-success">Enviado</span>
+                                        {% else %}
+                                            <span class="badge badge-secondary">Em andamento</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
                                         {% if pedido.pagamento_efetuado %}
                                             <span class="badge badge-success">Sim</span>
                                         {% else %}
@@ -40,7 +50,15 @@
                                     </td>
                                     <td>{{ pedido.criado_em }}</td>
                                     <td>R$ {{ pedido.valor_total }}</td>
-                                    <td><a class="btn btn-warning btn-sm" href="{% url 'pedido_detail' pedido.pk %}"><i class="fas fa-eye"></i> Detalhes</a></td>
+                                    <td class="text-nowrap">
+                                        <a class="btn btn-warning btn-sm" href="{% url 'pedido_detail' pedido.pk %}"><i class="fas fa-eye"></i> Detalhes</a>
+                                        {% if pedido.pode_alterar %}
+                                            <a class="btn btn-info btn-sm" href="{% url 'pedido_update' pedido.pk %}"><i class="fas fa-edit"></i> Editar</a>
+                                        {% endif %}
+                                        {% if pedido.pode_excluir %}
+                                            <a class="btn btn-danger btn-sm" href="{% url 'pedido_delete' pedido.pk %}"><i class="fas fa-trash-alt"></i> {% if eh_cliente %}Cancelar{% else %}Excluir{% endif %}</a>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

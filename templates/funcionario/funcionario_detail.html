@@ -16,5 +16,11 @@
         </div>
     </div>
 
+    {% if perms.funcionario.change_funcionario %}
+        <a class="btn btn-info" href="{% url 'funcionario_update' funcionario.pk %}"><i class="fas fa-edit mr-1"></i>Editar</a>
+    {% endif %}
+    {% if perms.funcionario.delete_funcionario and not eh_proprio %}
+        <a class="btn btn-danger" href="{% url 'funcionario_delete' funcionario.pk %}"><i class="fas fa-trash-alt mr-1"></i>Excluir</a>
+    {% endif %}
     <a class="btn btn-secondary" href="{% url 'funcionario_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
 {% endblock %}

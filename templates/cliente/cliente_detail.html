@@ -24,5 +24,15 @@
         </div>
     </div>
 
-    <a class="btn btn-secondary" href="{% url 'cliente_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
+    {% if pode_editar %}
+        <a class="btn btn-info" href="{% url 'cliente_update' cliente.pk %}"><i class="fas fa-edit mr-1"></i>Editar</a>
+    {% endif %}
+    {% if pode_excluir %}
+        <a class="btn btn-danger" href="{% url 'cliente_delete' cliente.pk %}"><i class="fas fa-trash-alt mr-1"></i>{% if eh_proprio %}Excluir minha conta{% else %}Excluir{% endif %}</a>
+    {% endif %}
+    {% if perms.cliente.view_cliente %}
+        <a class="btn btn-secondary" href="{% url 'cliente_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
+    {% else %}
+        <a class="btn btn-secondary" href="{% url 'item_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
+    {% endif %}
 {% endblock %}

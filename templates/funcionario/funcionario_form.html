@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}Novo funcionário{% endblock %}
+{% block title %}{% if form.instance.pk %}Editar funcionário{% else %}Novo funcionário{% endif %}{% endblock %}
 {% block content %}
-    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-user-tie"></i>Novo funcionário</h1>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-user-tie"></i>{% if form.instance.pk %}Editar funcionário{% else %}Novo funcionário{% endif %}</h1>
     <div class="card shadow mb-4">
         <div class="card-body">
             <form method="post" class="django-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i>Salvar</button>
-                <a class="btn btn-secondary" href="{% url 'funcionario_list' %}">Cancelar</a>
+                <a class="btn btn-secondary" href="{% if form.instance.pk %}{% url 'funcionario_detail' form.instance.pk %}{% else %}{% url 'funcionario_list' %}{% endif %}">Cancelar</a>
             </form>
         </div>
     </div>

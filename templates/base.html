@@ -84,6 +84,16 @@
         </li>
         {% endif %}
 
+        {% if user.cliente %}
+        <hr class="sidebar-divider">
+        <li class="nav-item {% if 'cliente' in request.resolver_match.url_name %}active{% endif %}">
+            <a class="nav-link" href="{% url 'cliente_detail' user.cliente.pk %}">
+                <i class="fas fa-user-circle"></i>
+                <span>Meu perfil</span>
+            </a>
+        </li>
+        {% endif %}
+
         {% if user.is_authenticated %}
         <hr class="sidebar-divider">
         <li class="nav-item {% if 'feedback' in request.resolver_match.url_name %}active{% endif %}">

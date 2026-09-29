@@ -40,7 +40,15 @@
                                             <span class="badge badge-secondary">Não</span>
                                         {% endif %}
                                     </td>
-                                    <td><a class="btn btn-warning btn-sm" href="{% url 'feedback_detail' feedback.pk %}"><i class="fas fa-eye"></i> Detalhes</a></td>
+                                    <td class="text-nowrap">
+                                        <a class="btn btn-warning btn-sm" href="{% url 'feedback_detail' feedback.pk %}"><i class="fas fa-eye"></i> Detalhes</a>
+                                        {% if feedback.pode_alterar %}
+                                            <a class="btn btn-info btn-sm" href="{% url 'feedback_update' feedback.pk %}"><i class="fas fa-edit"></i> Editar</a>
+                                        {% endif %}
+                                        {% if feedback.pode_excluir %}
+                                            <a class="btn btn-danger btn-sm" href="{% url 'feedback_delete' feedback.pk %}"><i class="fas fa-trash-alt"></i> Excluir</a>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

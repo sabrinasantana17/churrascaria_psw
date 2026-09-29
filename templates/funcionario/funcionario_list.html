@@ -32,7 +32,15 @@
                                     <td>{{ funcionario.get_cargo_display }}</td>
                                     <td>{{ funcionario.telefone }}</td>
                                     <td>R$ {{ funcionario.salario }}</td>
-                                    <td><a class="btn btn-warning btn-sm" href="{% url 'funcionario_detail' funcionario.pk %}"><i class="fas fa-eye"></i> Detalhes</a></td>
+                                    <td class="text-nowrap">
+                                        <a class="btn btn-warning btn-sm" href="{% url 'funcionario_detail' funcionario.pk %}"><i class="fas fa-eye"></i> Detalhes</a>
+                                        {% if perms.funcionario.change_funcionario %}
+                                            <a class="btn btn-info btn-sm" href="{% url 'funcionario_update' funcionario.pk %}"><i class="fas fa-edit"></i> Editar</a>
+                                        {% endif %}
+                                        {% if perms.funcionario.delete_funcionario and funcionario.pk != user.pk %}
+                                            <a class="btn btn-danger btn-sm" href="{% url 'funcionario_delete' funcionario.pk %}"><i class="fas fa-trash-alt"></i> Excluir</a>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

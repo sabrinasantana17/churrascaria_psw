@@ -23,5 +23,11 @@
         </div>
     </div>
 
+    {% if perms.item.change_item %}
+        <a class="btn btn-info" href="{% url 'item_update' item.pk %}"><i class="fas fa-edit mr-1"></i>Editar</a>
+    {% endif %}
+    {% if perms.item.delete_item %}
+        <a class="btn btn-danger" href="{% url 'item_delete' item.pk %}"><i class="fas fa-trash-alt mr-1"></i>Excluir</a>
+    {% endif %}
     <a class="btn btn-secondary" href="{% url 'item_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
 {% endblock %}

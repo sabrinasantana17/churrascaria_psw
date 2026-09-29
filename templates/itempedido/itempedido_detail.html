@@ -15,5 +15,11 @@
         </div>
     </div>
 
+    {% if perms.itempedido.change_itempedido %}
+        <a class="btn btn-info" href="{% url 'itempedido_update' item_pedido.pk %}"><i class="fas fa-edit mr-1"></i>Editar</a>
+    {% endif %}
+    {% if perms.itempedido.delete_itempedido %}
+        <a class="btn btn-danger" href="{% url 'itempedido_delete' item_pedido.pk %}"><i class="fas fa-trash-alt mr-1"></i>Excluir</a>
+    {% endif %}
     <a class="btn btn-secondary" href="{% url 'itempedido_list' %}"><i class="fas fa-arrow-left mr-1"></i>Voltar</a>
 {% endblock %}

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}Novo cliente{% endblock %}
+{% block title %}{% if form.instance.pk %}Editar cliente{% else %}Novo cliente{% endif %}{% endblock %}
 {% block content %}
-    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-users"></i>Novo cliente</h1>
+    <h1 class="h3 mb-4 text-gray-800 page-title"><i class="fas fa-users"></i>{% if form.instance.pk %}Editar cliente{% else %}Novo cliente{% endif %}</h1>
     <div class="card shadow mb-4">
         <div class="card-body">
             <form method="post" class="django-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i>Salvar</button>
-                <a class="btn btn-secondary" href="{% url 'cliente_list' %}">Cancelar</a>
+                <a class="btn btn-secondary" href="{% if form.instance.pk %}{% url 'cliente_detail' form.instance.pk %}{% else %}{% url 'cliente_list' %}{% endif %}">Cancelar</a>
             </form>
         </div>
     </div>
