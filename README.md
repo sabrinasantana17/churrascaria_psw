@@ -1,3 +1,6 @@
+#Link do vídeo do youtube
+https://youtu.be/2Qq7lmRN5mA
+
 # Churrascaria Fogo e Brasa
 
 Sistema web desenvolvido em Python utilizando o framework Django, destinado ao gerenciamento de pedidos de uma churrascaria, permitindo que o cliente monte o próprio pedido pelo cardápio e que a equipe acompanhe todos os pedidos enviados.
