@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:pk>/', views.itempedido_detail, name='itempedido_detail'),
     path('<int:pk>/editar/', views.itempedido_update, name='itempedido_update'),
     path('<int:pk>/excluir/', views.itempedido_delete, name='itempedido_delete'),
+>>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
 ]

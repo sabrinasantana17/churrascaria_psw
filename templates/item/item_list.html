@@ -45,9 +45,13 @@
                                         {% if perms.item.change_item %}
                                             <a class="btn btn-info btn-sm" href="{% url 'item_update' item.pk %}"><i class="fas fa-edit"></i> Editar</a>
                                         {% endif %}
+                                        {% if perms.item.change_item %}
+                                            <a class="btn btn-info btn-sm" href="{% url 'item_update' item.pk %}"><i class="fas fa-edit"></i> Editar</a>
+                                        {% endif %}
                                         {% if perms.item.delete_item %}
                                             <a class="btn btn-danger btn-sm" href="{% url 'item_delete' item.pk %}"><i class="fas fa-trash-alt"></i> Excluir</a>
                                         {% endif %}
+>>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
                                         {% if pode_montar_pedido and item.disponivel %}
                                             <a class="btn btn-success btn-sm" href="{% url 'adicionar_item' item.pk %}"><i class="fas fa-list-ul"></i> Itens do pedido</a>
                                         {% endif %}

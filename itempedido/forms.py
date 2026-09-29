@@ -55,6 +55,7 @@ class AdicionarItemForm(forms.ModelForm):
         if quantidade < 1:
             raise forms.ValidationError('A quantidade deve ser pelo menos 1.')
         return quantidade
+class ItemPedidoEditForm(forms.ModelForm):
 
 
 class ItemPedidoEditForm(forms.ModelForm):
@@ -81,3 +82,4 @@ class ItemPedidoEditForm(forms.ModelForm):
         if commit:
             item_pedido.save()  # o save do model recalcula o total do pedido
         return item_pedido
+>>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37

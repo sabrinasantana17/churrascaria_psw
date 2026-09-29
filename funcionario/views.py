@@ -4,8 +4,15 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse
 from churrascaria.utils import confirmar_exclusao, manter_login_apos_trocar_senha
 from .models import Funcionario
+from django.urls import reverse
+from churrascaria.utils import confirmar_exclusao, manter_login_apos_trocar_senha
+from .models import Funcionario
 from .forms import FuncionarioForm
 from .grupo import garantir_grupo_funcionario, atualizar_grupo_funcionario
+from .models import Funcionario
+from .forms import FuncionarioForm
+from .grupo import garantir_grupo_funcionario, atualizar_grupo_funcionario
+>>>>>>> df0c0425aa9c69d3c1990050c85afe59644dca37
 
 
 def _adicionar_ao_grupo_cargo(funcionario):
